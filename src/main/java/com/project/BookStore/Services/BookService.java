@@ -1,5 +1,4 @@
 
-
 package com.project.BookStore.Services;
 
 import java.util.List;
@@ -12,75 +11,69 @@ import com.project.BookStore.Repositories.BookRepo;
 
 @Service
 public class BookService {
-	
+
 	private BookRepo repo;
-	
+
 	public BookService(BookRepo repo) {
 		this.repo = repo;
-		
+
 	}
 
 	public Books addBook(Books book) {
 		try {
 			return repo.save(book);
-		}
-		catch(Exception e) {
-			throw new RuntimeException("Error saving book: "+ e.getMessage(), e);
+		} catch (Exception e) {
+			throw new RuntimeException("Error saving book: " + e.getMessage(), e);
 		}
 	}
-	
-	public List<Books> getAllBook(){
+
+	public List<Books> getAllBook() {
 		try {
-		return repo.findAll();
-		}
-		catch(Exception e) {
-			throw new RuntimeException("Error While Fetching Data: "+ e.getMessage(), e);
+			return repo.findAll();
+		} catch (Exception e) {
+			throw new RuntimeException("Error While Fetching Data: " + e.getMessage(), e);
 		}
 	}
-	
-	public Books updateBook(int id ,Books book) {
+
+	public Books updateBook(int id, Books book) {
 		Optional<Books> checkBookExist = repo.findById(id);
+		System.out.println("This is just to check the Git diff command");
 		try {
-			if(checkBookExist.isPresent())
+			if (checkBookExist.isPresent())
 				return repo.save(book);
-		}
-		catch(Exception e) {
-			throw new RuntimeException("Error updating book: "+ e.getMessage(), e);
+		} catch (Exception e) {
+			throw new RuntimeException("Error updating book: " + e.getMessage(), e);
 		}
 		return book;
-		
+
 	}
-	
+
 	public boolean deleteBook(int id) {
 		try {
-			if(repo.existsById(id)) {
+			if (repo.existsById(id)) {
 				repo.deleteById(id);
 				return true;
-			}
-			else
+			} else
 				return false;
-		}
-		catch(Exception e) {
-			throw new RuntimeException("Data Not Exist: "+ e.getMessage(),e);
-			
+		} catch (Exception e) {
+			throw new RuntimeException("Data Not Exist: " + e.getMessage(), e);
+
 		}
 	}
-	
+
 	public Books getBook(String title) {
 		try {
 			return repo.findByTitle(title);
-		}
-		catch(Exception e) {
-			throw new RuntimeException("Please Enter Correct Data or Error While Fetching Data: "+ e.getMessage(),e);
+		} catch (Exception e) {
+			throw new RuntimeException("Please Enter Correct Data or Error While Fetching Data: " + e.getMessage(), e);
 		}
 	}
-	
+
 	public Books getBookbyAuthor(String author) {
 		try {
 			return repo.findByAuthor(author);
-		}
-		catch(Exception e) {
-			throw new RuntimeException("Error While Fetching Data: "+e.getMessage(),e);
+		} catch (Exception e) {
+			throw new RuntimeException("Error While Fetching Data: " + e.getMessage(), e);
 		}
 	}
 }
