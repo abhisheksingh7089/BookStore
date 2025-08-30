@@ -21,7 +21,6 @@ public class BookService {
 
 	public Books addBook(Books book) {
 		try {
-			System.out.println("Test message");
 			return repo.save(book);
 		} catch (Exception e) {
 			throw new RuntimeException("Error saving book: " + e.getMessage(), e);
@@ -38,7 +37,6 @@ public class BookService {
 
 	public Books updateBook(int id, Books book) {
 		Optional<Books> checkBookExist = repo.findById(id);
-		System.out.println("This is just to check the Git diff command");
 		try {
 			if (checkBookExist.isPresent())
 				return repo.save(book);
