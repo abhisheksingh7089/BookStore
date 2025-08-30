@@ -21,6 +21,7 @@ public class BookService {
 
 	public Books addBook(Books book) {
 		try {
+			System.out.println("Test message");
 			return repo.save(book);
 		} catch (Exception e) {
 			throw new RuntimeException("Error saving book: " + e.getMessage(), e);

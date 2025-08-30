@@ -1,2 +1,0 @@
-admin.name = admin
-admin.password = a@123
